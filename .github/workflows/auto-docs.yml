@@ -6,9 +6,7 @@ on:
       - main
     paths:
       - 'action.yml'
-  pull_request:
-    paths:
-      - 'action.yml'
+
 
 jobs:
   generate-docs:
@@ -21,8 +19,7 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
+
 
       # Step 2: Generate the documentation
       - name: Generate Documentation
