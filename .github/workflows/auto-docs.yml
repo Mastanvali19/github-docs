@@ -19,6 +19,6 @@ jobs:
       - name: Generate Action Docs
         uses: pndurette/gh-actions-auto-docs@v1
         with:
-          action_yaml_file: ./action.yml
+          action_yaml_file: ./action.yaml
           target_file: ./README.md
           git_push: true
