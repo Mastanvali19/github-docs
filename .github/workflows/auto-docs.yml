@@ -1,0 +1,43 @@
+name: Generate Action Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'action.yml'
+  pull_request:
+    paths:
+      - 'action.yml'
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Required to push changes to the repository
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      # Step 2: Generate the documentation
+      - name: Generate Documentation
+        uses: pndurette/gh-actions-auto-docs@v1
+        with:
+          action_yaml_file: ./action.yml
+          template_file: ./README.md
+          target_file: ./README.md
+          marker_start: <!--doc_begin-->
+          marker_end: <!--doc_end-->
+          git_push: true
+          git_push_user_name: github-actions[bot]
+          git_push_user_email: github-actions[bot]@users.noreply.github.com
+          git_commit_message: "Auto-generate action documentation"
+
+      # Step 3: Confirm Success
+      - name: Log Success
+        run: echo "Documentation generation complete!"
