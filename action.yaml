@@ -1,0 +1,13 @@
+name: "Auto-Docs Example Action"
+description: "An example GitHub Action for generating auto-docs"
+inputs:
+  example-input:
+    description: "An example input"
+    required: true
+    default: "default-value"
+outputs:
+  example-output:
+    description: "Github-docs output"
+runs:
+  using: "node16"
+  main: "dist/index.js" # Replace with the path to your compiled action code
